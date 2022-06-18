@@ -23,6 +23,26 @@ public class SrednjaTemperatura {
         private int maxTemp = 0;
         private int maxCounter = 0;
 
+        @Override
+        public void readFields(DataInput in) throws IOException { //citanje csv fajlova
+            minTemp = in.readInt();
+            minCounter = in.readInt();
+            maxTemp = in.readInt();
+            maxCounter = in.readInt();
+        }
+        @Override
+        public void write(DataOutput out) throws IOException { //ispisivanje
+            out.writeInt(minTemp);
+            out.writeInt(minCounter);
+            out.writeInt(maxTemp);
+            out.writeInt(maxCounter);
+        }
+
+        public String toString() {
+            return "MinAverage: " + (1.0 * minTemp/minCounter) + ", MaxAverage: " + (1.0 * maxTemp/maxCounter);
+        
+        }
+        
         public int getMinTemp() {
             return minTemp;
         }
@@ -54,26 +74,7 @@ public class SrednjaTemperatura {
         public void setMaxCounter(int maxCounter) {
             this.maxCounter = maxCounter;
         }
-
-        @Override
-        public void readFields(DataInput in) throws IOException { //citanje csv fajlova
-            minTemp = in.readInt();
-            minCounter = in.readInt();
-            maxTemp = in.readInt();
-            maxCounter = in.readInt();
-        }
-        @Override
-        public void write(DataOutput out) throws IOException { //ispisivanje
-            out.writeInt(minTemp);
-            out.writeInt(minCounter);
-            out.writeInt(maxTemp);
-            out.writeInt(maxCounter);
-        }
-
-        public String toString() {
-            return "MinAverage: " + (1.0 * minTemp/minCounter) + ", MaxAverage: " + (1.0 * maxTemp/maxCounter);
-        }
-
+        
     }
 
 
